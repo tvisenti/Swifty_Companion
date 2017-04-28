@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		463E73021EB0E898003946E7 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463E73011EB0E898003946E7 /* UserInfo.swift */; };
+		466153321EB376EC003B5F98 /* ProfilViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466153311EB376EC003B5F98 /* ProfilViewController.swift */; };
 		468D5FC81EAF77E90072B5F0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468D5FC71EAF77E90072B5F0 /* AppDelegate.swift */; };
 		468D5FCA1EAF77E90072B5F0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468D5FC91EAF77E90072B5F0 /* ViewController.swift */; };
 		468D5FCD1EAF77E90072B5F0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 468D5FCB1EAF77E90072B5F0 /* Main.storyboard */; };
@@ -35,6 +37,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		463E73011EB0E898003946E7 /* UserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		466153311EB376EC003B5F98 /* ProfilViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilViewController.swift; sourceTree = "<group>"; };
 		468D5FC41EAF77E90072B5F0 /* Swifty_companion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Swifty_companion.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		468D5FC71EAF77E90072B5F0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		468D5FC91EAF77E90072B5F0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -101,6 +105,8 @@
 			children = (
 				468D5FC71EAF77E90072B5F0 /* AppDelegate.swift */,
 				46CA46EF1EAFA2040060DB99 /* APIHandler.swift */,
+				463E73011EB0E898003946E7 /* UserInfo.swift */,
+				466153311EB376EC003B5F98 /* ProfilViewController.swift */,
 				468D5FC91EAF77E90072B5F0 /* ViewController.swift */,
 				468D5FCB1EAF77E90072B5F0 /* Main.storyboard */,
 				468D5FCE1EAF77E90072B5F0 /* Assets.xcassets */,
@@ -262,6 +268,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				463E73021EB0E898003946E7 /* UserInfo.swift in Sources */,
+				466153321EB376EC003B5F98 /* ProfilViewController.swift in Sources */,
 				46CA46F01EAFA2040060DB99 /* APIHandler.swift in Sources */,
 				468D5FCA1EAF77E90072B5F0 /* ViewController.swift in Sources */,
 				468D5FC81EAF77E90072B5F0 /* AppDelegate.swift in Sources */,

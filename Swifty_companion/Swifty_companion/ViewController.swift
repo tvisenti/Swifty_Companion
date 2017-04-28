@@ -14,9 +14,11 @@ class ViewController: UIViewController {
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var buttonText: UIButton!
     
+    let authentification = Oauth.sharedInstance
+    let userInfo = UserInfo()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         initView()
     
     }
@@ -27,11 +29,32 @@ class ViewController: UIViewController {
     
     func initView() {
         buttonText.layer.cornerRadius = 5;
+        self.navigationController?.navigationBar.isHidden = true
     }
 
     @IBAction func buttonAction() {
-        
+        if let login = textField.text {
+            authentification.connectToAPI(completionHandler: { (hasSucceed, error) in
+                if hasSucceed {
+                    print("Connection to API is a success")
+                    self.authentification.getUserInfo(login: login, completionHandler: { (hasSucceed, error, infos) in
+                        if hasSucceed {
+                            print("Get User Info is a success")
+                            print(infos!)
+                            self.userInfo.initUserInfo(infos: infos!)
+                            let controller = self.storyboard?.instantiateViewController(withIdentifier: "ProfilViewControllerID") as! ProfilViewController
+                            controller.userInfo = self.userInfo
+                            self.navigationController!.pushViewController(controller, animated: false)
+                        } else {
+                            print("Error (getUserInfo/buttonAction): \(error)")
+                        }
+                    })
+                    
+                } else {
+                    print("Error (connectToAPI/buttonAction): \(error)")
+                }
+            })
+        }
     }
-
 }
 
