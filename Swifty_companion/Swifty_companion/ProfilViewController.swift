@@ -34,12 +34,12 @@ class ProfilViewController : UIViewController {
         phoneLabel.text = userInfo.phoneNumber
         mailLabel.text = userInfo.email
         locationLabel.text = userInfo.location
-        correctionLabel.text = String(userInfo.correctionPoint) + " points"
+        correctionLabel.text = String(describing: userInfo.correctionPoint) + " points"
         
         DispatchQueue.global().async {
-            let data = try? Data(contentsOf: URL(string: self.userInfo.imageUrl)!)
+            let data = try? Data(contentsOf: URL(string: self.userInfo.imageUrl!)!)
             DispatchQueue.main.async {
-                self.imageView.contentMode = .center
+//                self.imageView.contentMode = .center
                 self.imageView.image = UIImage(data: data!)
                 self.imageView.layer.cornerRadius = 45
             }

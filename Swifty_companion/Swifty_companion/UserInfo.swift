@@ -7,91 +7,60 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 class UserInfo {
     
     static let sharedInstance = UserInfo()
     
-    var displayName : String = "Unvailable"
-    var login : String = "Unvailable"
-    var email : String = "Unvailable"
-    var location : String = "Unvailable"
-    var phoneNumber : String = "Unvailable"
-    var correctionPoint : Int = 0
-    var imageUrl : String = "Unvailable"
-    
-    // cursus_users
-    var grade : String = "Unknown"
-    var level : Float = 0
-    //skills : name + level
-    var skills : NSArray?
-    
-    // project : name + success? + final_mark + finished
-    var project : [String:String]?
+    var displayName : String?
+    var login : String?
+    var email : String?
+    var location : String?
+    var phoneNumber : String?
+    var correctionPoint : Int?
+    var imageUrl : String?
+    var level : Float?
+    var skills = [SkillsUser]()
+    var projects = [ProjectsUser]()
+    var isStudent : Bool?
     
     
-    func initUserInfo(infos : NSDictionary) {
-        if let name = infos.object(forKey: "displayname") {
-            displayName = name as! String
-        }
+    func initUserInfo(json: JSON) {
+        displayName = json["displayname"].stringValue
+        login = json["login"].stringValue
+        email = json["email"].stringValue
+        location = json["location"].stringValue
+        phoneNumber = json["phone"].stringValue
+        correctionPoint = json["correction_point"].intValue
+        imageUrl = json["image"].stringValue
         
-        if let log = infos.object(forKey: "login") {
-            login = log as! String
-        }
-    
-        if let mail = infos.object(forKey: "email") {
-            email = mail as! String
-        }
-        
-        if let loca = infos.object(forKey: "location") {
-            if loca is NSNull {
-                location = "Unvailable"
-            } else {
-             location = loca as! String
+        if let cursus = json["cursus_users"].array {
+            for entry in cursus {
+                let cursus_name = entry["cursus"]["slug"].stringValue
+                if cursus_name == "42" {
+                    isStudent = true
+                    if let skls = entry["skills"].array {
+                        for skill in skls {
+                            self.skills.append(SkillsUser(json: skill))
+                        }
+                    }
+                }
             }
         }
         
-        if let phone = infos.object(forKey: "phone") {
-            if phone is NSNull {
-                phoneNumber = "Unvailable"
-            } else {
-                phoneNumber = phone as! String
+        if let cursus = json["projects_users"].array {
+            for entry in cursus {
+                let cursus_name = entry["cursus"]["slug"].stringValue
+                if cursus_name == "42" {
+                    if let prjs = entry["projects"].array {
+                        for project in prjs {
+                            self.projects.append(ProjectsUser(json: project))
+                        }
+                    }
+                    level = entry["level"].floatValue
+                }
             }
         }
-        
-        if let correction = infos.object(forKey: "correction_point") {
-            correctionPoint = correction as! Int
-        }
-        
-        if let image = infos.object(forKey: "image_url") {
-            imageUrl = image as! String
-        }
-        
-        let cursusUser = infos.object(forKey: "cursus_users") as! NSArray
-        if cursusUser.count > 0 {
-            
-//            let test = cursusUser.object(at: index)
-//            print(test)
-        }
-            print("----------")
-            print(cursusUser)
-            print("----------")
-//            skills = (cursusUser as AnyObject).object(forKey: "skills") as! NSArray?
-        
-//        if let projects_user = infos.object(forKey: "projects_users") as? [[String: Any]] {
-//            for project in projects_user {
-//                print(project)
-//            }
-//            print("----------")
-//            print(projects_user)
-//            print("----------")
-//        }
-
-        print(displayName)
-        print(login)
-        print(email)
-        print(location)
-        print(phoneNumber)
-        print(correctionPoint)
     }
 }

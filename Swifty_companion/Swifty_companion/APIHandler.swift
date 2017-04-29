@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 class Oauth {
     
@@ -17,7 +18,8 @@ class Oauth {
     var access_token : String!
     
     static let sharedInstance = Oauth()
-    
+    var user: UserInfo?
+
     func getToken() -> URL {
         return URL(string: API_SITE + "/oauth/token")!
     }
@@ -26,7 +28,7 @@ class Oauth {
         return URL(string: "\(API_SITE)/v2/users/\(login)?access_token=\(access_token!)")!
     }
     
-    func getUserInfo(login : String, completionHandler: @escaping (Bool, Error?, NSDictionary?) -> ()) {
+    func getUserInfo(login : String, completionHandler: @escaping (Bool, Error?, UserInfo?) -> ()) {
         DispatchQueue.global(qos: .background).async {
             var request = URLRequest(url: self.getInfoCursus(login: login))
             
@@ -37,14 +39,13 @@ class Oauth {
                 if error != nil {
                     completionHandler(false, error!, nil)
                 } else if let d = data {
-                    do {
-                        if let respJson: NSDictionary = try JSONSerialization.jsonObject(with: d, options: JSONSerialization.ReadingOptions.mutableContainers) as? NSDictionary {
-                            DispatchQueue.main.async {
-                                completionHandler(true, nil, respJson)
-                            }
+                    let dataString = NSString(data: d, encoding: String.Encoding.utf8.rawValue)
+                    if let dataFromString = dataString?.data(using: String.Encoding.utf8.rawValue, allowLossyConversion: false) {
+                        let userJson = JSON(data: dataFromString)
+                        DispatchQueue.main.async {
+                            self.user?.initUserInfo(json: userJson)
+                            completionHandler(true, nil, self.user)
                         }
-                    } catch (let err) {
-                        completionHandler(false, err, nil)
                     }
                 }
             }
