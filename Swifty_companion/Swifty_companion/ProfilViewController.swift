@@ -18,12 +18,11 @@ class ProfilViewController : UIViewController {
     @IBOutlet weak var mailLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var correctionLabel: UILabel!
-    
+    @IBOutlet weak var itemTabBar: UITabBarItem!
     
     var userInfo = UserInfo()
     
     override func viewDidLoad() {
-        print(userInfo)
         self.navigationController?.navigationBar.isHidden = false
         initText()
     }
@@ -43,9 +42,12 @@ class ProfilViewController : UIViewController {
         DispatchQueue.global().async {
             let data = try? Data(contentsOf: URL(string: self.userInfo.imageUrl!)!)
             DispatchQueue.main.async {
-                self.imageView.image = UIImage(data: data!)
+                if data != nil {
+                    self.imageView.image = UIImage(data: data!)
+                }
                 self.imageView.layer.cornerRadius = self.imageView.frame.size.width / 2;
             }
         }
+        
     }
 }

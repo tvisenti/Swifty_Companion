@@ -11,10 +11,10 @@ import SwiftyJSON
 
 class SkillsUser {
     
-    var name : String!
-    var level : Float!
+    var name : String?
+    var level : Float?
     
-    required init (json: JSON) {
+    func initSkill(json: JSON) {
         name = json["name"].stringValue
         level = json["level"].floatValue
     }

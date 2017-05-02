@@ -11,15 +11,15 @@ import SwiftyJSON
 
 class ProjectsUser {
     
-    var name : String!
-    var mark : Int!
-    var status : String!
-    var succeed : Bool!
+    var name : String?
+    var mark : Int?
+    var status : String?
+    var succeed : Bool?
     
-    required init (json: JSON) {
-        name = json["slug"].stringValue
+    func initProjects(json: JSON) {
+        name = json["project"]["name"].stringValue
         mark = json["final_mark"].intValue
-        status = json["validated"].stringValue
+        status = json["status"].stringValue
         succeed = json["validated?"].boolValue
     }
 }

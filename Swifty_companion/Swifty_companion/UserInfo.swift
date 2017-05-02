@@ -36,6 +36,7 @@ class UserInfo {
         correctionPoint = json["correction_point"].intValue
         imageUrl = json["image_url"].stringValue
         
+        skills.removeAll()
         if let cursus = json["cursus_users"].array {
             for entry in cursus {
                 let cursus_name = entry["cursus"]["slug"].stringValue
@@ -44,20 +45,21 @@ class UserInfo {
                     level = entry["level"].floatValue
                     if let skls = entry["skills"].array {
                         for skill in skls {
-                            self.skills.append(SkillsUser(json: skill))
+                            let skillOb = SkillsUser()
+                            skillOb.initSkill(json: skill)
+                            self.skills.append(skillOb)
                         }
                     }
                 }
             }
         }
         
-        if let cursus = json["projects_users"].array {
-            for entry in cursus {
-                if let prjs = entry["projects"].array {
-                    for project in prjs {
-                        self.projects.append(ProjectsUser(json: project))
-                    }
-                }
+        projects.removeAll()
+        if let projects = json["projects_users"].array {
+            for project in projects {
+                let projectOb = ProjectsUser()
+                projectOb.initProjects(json: project)
+                self.projects.append(projectOb)
             }
         }
     }

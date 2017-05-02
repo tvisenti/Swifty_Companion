@@ -15,6 +15,10 @@
 		468D5FCF1EAF77E90072B5F0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 468D5FCE1EAF77E90072B5F0 /* Assets.xcassets */; };
 		468D5FD21EAF77E90072B5F0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 468D5FD01EAF77E90072B5F0 /* LaunchScreen.storyboard */; };
 		46CA46F01EAFA2040060DB99 /* APIHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CA46EF1EAFA2040060DB99 /* APIHandler.swift */; };
+		46F1791C1EB8C23C0007FDC1 /* ProjectsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F1791B1EB8C23C0007FDC1 /* ProjectsTableViewController.swift */; };
+		46F1791E1EB8C2460007FDC1 /* SkillsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F1791D1EB8C2460007FDC1 /* SkillsTableViewController.swift */; };
+		46F179221EB8D1190007FDC1 /* SkillsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F179211EB8D1190007FDC1 /* SkillsTableViewCell.swift */; };
+		46F179241EB8D48C0007FDC1 /* ProjectsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F179231EB8D48C0007FDC1 /* ProjectsTableViewCell.swift */; };
 		951ADF011EB4D5C300A31E8E /* ProjectsUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951ADF001EB4D5C300A31E8E /* ProjectsUser.swift */; };
 		951ADF031EB4D5D200A31E8E /* SkillsUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951ADF021EB4D5D200A31E8E /* SkillsUser.swift */; };
 		9588F9971EB4D1B200104AEF /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 9588F9961EB4D1B200104AEF /* Podfile */; };
@@ -53,6 +57,10 @@
 		468D5FD81EAF77E90072B5F0 /* Swifty_companionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Swifty_companionTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		468D5FE31EAF77E90072B5F0 /* Swifty_companionUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Swifty_companionUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		46CA46EF1EAFA2040060DB99 /* APIHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIHandler.swift; sourceTree = "<group>"; };
+		46F1791B1EB8C23C0007FDC1 /* ProjectsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectsTableViewController.swift; sourceTree = "<group>"; };
+		46F1791D1EB8C2460007FDC1 /* SkillsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillsTableViewController.swift; sourceTree = "<group>"; };
+		46F179211EB8D1190007FDC1 /* SkillsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillsTableViewCell.swift; sourceTree = "<group>"; };
+		46F179231EB8D48C0007FDC1 /* ProjectsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectsTableViewCell.swift; sourceTree = "<group>"; };
 		951ADF001EB4D5C300A31E8E /* ProjectsUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectsUser.swift; sourceTree = "<group>"; };
 		951ADF021EB4D5D200A31E8E /* SkillsUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillsUser.swift; sourceTree = "<group>"; };
 		9588F9961EB4D1B200104AEF /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
@@ -119,15 +127,19 @@
 			children = (
 				468D5FC71EAF77E90072B5F0 /* AppDelegate.swift */,
 				46CA46EF1EAFA2040060DB99 /* APIHandler.swift */,
+				468D5FC91EAF77E90072B5F0 /* ViewController.swift */,
 				463E73011EB0E898003946E7 /* UserInfo.swift */,
 				466153311EB376EC003B5F98 /* ProfilViewController.swift */,
-				468D5FC91EAF77E90072B5F0 /* ViewController.swift */,
+				951ADF001EB4D5C300A31E8E /* ProjectsUser.swift */,
+				46F179231EB8D48C0007FDC1 /* ProjectsTableViewCell.swift */,
+				46F1791B1EB8C23C0007FDC1 /* ProjectsTableViewController.swift */,
+				951ADF021EB4D5D200A31E8E /* SkillsUser.swift */,
+				46F179211EB8D1190007FDC1 /* SkillsTableViewCell.swift */,
+				46F1791D1EB8C2460007FDC1 /* SkillsTableViewController.swift */,
 				468D5FCB1EAF77E90072B5F0 /* Main.storyboard */,
 				468D5FCE1EAF77E90072B5F0 /* Assets.xcassets */,
 				468D5FD01EAF77E90072B5F0 /* LaunchScreen.storyboard */,
 				468D5FD31EAF77E90072B5F0 /* Info.plist */,
-				951ADF001EB4D5C300A31E8E /* ProjectsUser.swift */,
-				951ADF021EB4D5D200A31E8E /* SkillsUser.swift */,
 			);
 			path = Swifty_companion;
 			sourceTree = "<group>";
@@ -328,12 +340,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				951ADF031EB4D5D200A31E8E /* SkillsUser.swift in Sources */,
+				46F179241EB8D48C0007FDC1 /* ProjectsTableViewCell.swift in Sources */,
 				463E73021EB0E898003946E7 /* UserInfo.swift in Sources */,
 				466153321EB376EC003B5F98 /* ProfilViewController.swift in Sources */,
+				46F179221EB8D1190007FDC1 /* SkillsTableViewCell.swift in Sources */,
+				46F1791E1EB8C2460007FDC1 /* SkillsTableViewController.swift in Sources */,
 				46CA46F01EAFA2040060DB99 /* APIHandler.swift in Sources */,
 				468D5FCA1EAF77E90072B5F0 /* ViewController.swift in Sources */,
 				951ADF011EB4D5C300A31E8E /* ProjectsUser.swift in Sources */,
 				468D5FC81EAF77E90072B5F0 /* AppDelegate.swift in Sources */,
+				46F1791C1EB8C23C0007FDC1 /* ProjectsTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

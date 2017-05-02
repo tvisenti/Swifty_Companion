@@ -19,8 +19,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        initView()
-    
+        buttonText.layer.cornerRadius = 5;
     }
     
     override func viewWillAppear(_ animated : Bool) {
@@ -29,10 +28,6 @@ class ViewController: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-    }
-    
-    func initView() {
-        buttonText.layer.cornerRadius = 5;
     }
 
     @IBAction func buttonAction() {
@@ -44,18 +39,30 @@ class ViewController: UIViewController {
                         if hasSucceed {
                             print("Get User Info is a success")
                             self.userInfo = user!
-                            let controller = self.storyboard?.instantiateViewController(withIdentifier: "ProfilViewControllerID") as! ProfilViewController
-                            controller.userInfo = self.userInfo
-                            self.navigationController!.pushViewController(controller, animated: false)
+                            self.performSegue(withIdentifier: "SearchToProfilSegue", sender: self)
                         } else {
                             print("Error (getUserInfo/buttonAction): \(error)")
                         }
                     })
-                    
                 } else {
                     print("Error (connectToAPI/buttonAction): \(error)")
                 }
             })
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "SearchToProfilSegue" {
+            let tabVc = segue.destination as! UITabBarController
+            let profilVc = tabVc.viewControllers?[0] as! ProfilViewController
+            profilVc.userInfo = userInfo
+            profilVc.itemTabBar.image = UIImage(named: "user_icon")
+            let projectsVC = tabVc.viewControllers?[1] as! ProjectsTableViewController
+            projectsVC.userInfo = userInfo
+            projectsVC.itemTabBar.image = UIImage(named: "project_icon")
+            let skillsVc = tabVc.viewControllers?[2] as! SkillsTableViewController
+            skillsVc.userInfo = userInfo
+            skillsVc.itemTabBar.image = UIImage(named: "skill_icon")
         }
     }
 }
