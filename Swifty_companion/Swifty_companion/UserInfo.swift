@@ -27,19 +27,21 @@ class UserInfo {
     
     
     func initUserInfo(json: JSON) {
+        print(json)
         displayName = json["displayname"].stringValue
         login = json["login"].stringValue
         email = json["email"].stringValue
         location = json["location"].stringValue
         phoneNumber = json["phone"].stringValue
         correctionPoint = json["correction_point"].intValue
-        imageUrl = json["image"].stringValue
+        imageUrl = json["image_url"].stringValue
         
         if let cursus = json["cursus_users"].array {
             for entry in cursus {
                 let cursus_name = entry["cursus"]["slug"].stringValue
                 if cursus_name == "42" {
                     isStudent = true
+                    level = entry["level"].floatValue
                     if let skls = entry["skills"].array {
                         for skill in skls {
                             self.skills.append(SkillsUser(json: skill))
@@ -51,14 +53,10 @@ class UserInfo {
         
         if let cursus = json["projects_users"].array {
             for entry in cursus {
-                let cursus_name = entry["cursus"]["slug"].stringValue
-                if cursus_name == "42" {
-                    if let prjs = entry["projects"].array {
-                        for project in prjs {
-                            self.projects.append(ProjectsUser(json: project))
-                        }
+                if let prjs = entry["projects"].array {
+                    for project in prjs {
+                        self.projects.append(ProjectsUser(json: project))
                     }
-                    level = entry["level"].floatValue
                 }
             }
         }

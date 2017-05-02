@@ -24,7 +24,7 @@ class ProfilViewController : UIViewController {
     
     override func viewDidLoad() {
         print(userInfo)
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
+        self.navigationController?.navigationBar.isHidden = false
         initText()
     }
     
@@ -34,14 +34,17 @@ class ProfilViewController : UIViewController {
         phoneLabel.text = userInfo.phoneNumber
         mailLabel.text = userInfo.email
         locationLabel.text = userInfo.location
-        correctionLabel.text = String(describing: userInfo.correctionPoint) + " points"
+        if let point = userInfo.correctionPoint {
+            correctionLabel.text = String(point) + " points"
+        } else {
+            correctionLabel.text = "0 point"
+        }
         
         DispatchQueue.global().async {
             let data = try? Data(contentsOf: URL(string: self.userInfo.imageUrl!)!)
             DispatchQueue.main.async {
-//                self.imageView.contentMode = .center
                 self.imageView.image = UIImage(data: data!)
-                self.imageView.layer.cornerRadius = 45
+                self.imageView.layer.cornerRadius = self.imageView.frame.size.width / 2;
             }
         }
     }

@@ -22,6 +22,10 @@ class ViewController: UIViewController {
         initView()
     
     }
+    
+    override func viewWillAppear(_ animated : Bool) {
+        self.navigationController?.navigationBar.isHidden = true
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -29,7 +33,6 @@ class ViewController: UIViewController {
     
     func initView() {
         buttonText.layer.cornerRadius = 5;
-        self.navigationController?.navigationBar.isHidden = true
     }
 
     @IBAction func buttonAction() {

@@ -18,7 +18,7 @@ class Oauth {
     var access_token : String!
     
     static let sharedInstance = Oauth()
-    var user: UserInfo?
+    var user: UserInfo = UserInfo()
 
     func getToken() -> URL {
         return URL(string: API_SITE + "/oauth/token")!
@@ -43,7 +43,7 @@ class Oauth {
                     if let dataFromString = dataString?.data(using: String.Encoding.utf8.rawValue, allowLossyConversion: false) {
                         let userJson = JSON(data: dataFromString)
                         DispatchQueue.main.async {
-                            self.user?.initUserInfo(json: userJson)
+                            self.user.initUserInfo(json: userJson)
                             completionHandler(true, nil, self.user)
                         }
                     }
