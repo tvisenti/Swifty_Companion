@@ -20,7 +20,6 @@ class ProjectsTableViewController : UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let projects = userInfo.projects
-        print(projects)
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProjectsCell") as! ProjectsTableViewCell
         if projects[indexPath.row].succeed == true {
             cell.projectImageView?.image = UIImage(named: "success")

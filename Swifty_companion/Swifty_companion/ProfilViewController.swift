@@ -11,6 +11,7 @@ import UIKit
 
 class ProfilViewController : UIViewController {
     
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var loginLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
@@ -24,15 +25,24 @@ class ProfilViewController : UIViewController {
     
     override func viewDidLoad() {
         self.navigationController?.navigationBar.isHidden = false
+        self.scrollView.contentSize.height = 600
         initText()
     }
     
     func initText() {
         loginLabel.text = userInfo.login
         nameLabel.text = userInfo.displayName
-        phoneLabel.text = userInfo.phoneNumber
+        if (userInfo.phoneNumber?.isEmpty)! {
+           phoneLabel.text = "Unknown"
+        } else {
+           phoneLabel.text = userInfo.phoneNumber
+        }
         mailLabel.text = userInfo.email
-        locationLabel.text = userInfo.location
+        if (userInfo.location?.isEmpty)! {
+            locationLabel.text = "Unknown"
+        } else {
+            locationLabel.text = userInfo.location
+        }
         if let point = userInfo.correctionPoint {
             correctionLabel.text = String(point) + " points"
         } else {
