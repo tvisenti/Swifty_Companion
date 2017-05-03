@@ -15,10 +15,23 @@ class ProjectsTableViewController : UITableViewController {
     var userInfo = UserInfo()
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        tableView.allowsSelection = false
+        if userInfo.projects.count == 0 {
+            return 1
+        }
         return userInfo.projects.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if userInfo.projects.count == 0 && indexPath.row == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ProjectsCell") as! ProjectsTableViewCell
+            cell.projectNameLabel.text = "No Project"
+            cell.projectImageView.isHidden = true
+            cell.projectLevelLabel.isHidden = true
+            cell.projectStatutLabel.isHidden = true
+            cell.progressBar.isHidden = true
+            return cell
+        }
         let projects = userInfo.projects
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProjectsCell") as! ProjectsTableViewCell
         if projects[indexPath.row].succeed == true {

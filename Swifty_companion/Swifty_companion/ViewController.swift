@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var buttonText: UIButton!
+    @IBOutlet weak var spinnerActivity: UIActivityIndicatorView!
     
     let authentification = Oauth.sharedInstance
     var userInfo = UserInfo()
@@ -20,32 +21,55 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         buttonText.layer.cornerRadius = 5;
+        spinnerActivity.isHidden = !spinnerActivity.isHidden
     }
     
     override func viewWillAppear(_ animated : Bool) {
         self.navigationController?.navigationBar.isHidden = true
+        textField.text = ""
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
+    func showSpinner() {
+        spinnerActivity.startAnimating()
+        spinnerActivity.isHidden = false
+        buttonText.isHidden = true
+    }
+    
+    func hideSpinner() {
+        spinnerActivity.stopAnimating()
+        spinnerActivity.isHidden = true
+        buttonText.isHidden = false
+    }
 
     @IBAction func buttonAction() {
+        showSpinner()
+        
         if let login = textField.text {
+            if login.isEmpty {
+                self.hideSpinner()
+                return
+            }
             authentification.connectToAPI(completionHandler: { (hasSucceed, error) in
                 if hasSucceed {
                     print("Connection to API is a success")
                     self.authentification.getUserInfo(login: login, completionHandler: { (hasSucceed, error, user) in
                         if hasSucceed {
                             print("Get User Info is a success")
+                            self.hideSpinner()
                             self.userInfo = user!
                             self.performSegue(withIdentifier: "SearchToProfilSegue", sender: self)
                         } else {
                             print("Error (getUserInfo/buttonAction): \(error)")
+                            self.hideSpinner()
                         }
                     })
                 } else {
                     print("Error (connectToAPI/buttonAction): \(error)")
+                    self.hideSpinner()
                 }
             })
         }

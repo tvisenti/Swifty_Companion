@@ -25,7 +25,6 @@ class ProfilViewController : UIViewController {
     
     override func viewDidLoad() {
         self.navigationController?.navigationBar.isHidden = false
-        self.scrollView.contentSize.height = 600
         initText()
     }
     

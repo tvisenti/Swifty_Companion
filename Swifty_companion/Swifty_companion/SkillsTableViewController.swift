@@ -15,10 +15,21 @@ class SkillsTableViewController : UITableViewController {
     var userInfo = UserInfo()
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        tableView.allowsSelection = false
+        if userInfo.skills.count == 0 {
+            return 1
+        }
         return userInfo.skills.count
     }
-    
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if userInfo.skills.count == 0 && indexPath.row == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SkillsCell") as! SkillsTableViewCell
+            cell.skillNameLabel.text = "No skill"
+            cell.skillLevelLabel.isHidden = true
+            cell.progressBar.isHidden = true
+            return cell
+        }
         let skills = userInfo.skills
         let cell = tableView.dequeueReusableCell(withIdentifier: "SkillsCell") as! SkillsTableViewCell
         cell.skillNameLabel.text = skills[indexPath.row].name

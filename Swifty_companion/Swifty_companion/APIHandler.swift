@@ -16,6 +16,8 @@ class Oauth {
     let API_SITE = "https://api.intra.42.fr"
     
     var access_token : String!
+    var created_token : Double!
+    var expired_token : Double!
     
     static let sharedInstance = Oauth()
     var user: UserInfo = UserInfo()
@@ -42,9 +44,15 @@ class Oauth {
                     let dataString = NSString(data: d, encoding: String.Encoding.utf8.rawValue)
                     if let dataFromString = dataString?.data(using: String.Encoding.utf8.rawValue, allowLossyConversion: false) {
                         let userJson = JSON(data: dataFromString)
+                        print(userJson)
                         DispatchQueue.main.async {
-                            self.user.initUserInfo(json: userJson)
-                            completionHandler(true, nil, self.user)
+                            if userJson.isEmpty == false {
+                                self.user.initUserInfo(json: userJson)
+                                completionHandler(true, nil, self.user)
+                            } else {
+                                completionHandler(false, nil, nil)
+                                print("Error, no user has this name")
+                            }
                         }
                     }
                 }
@@ -54,7 +62,17 @@ class Oauth {
     }
     
     func connectToAPI(completionHandler: @escaping (Bool, Error?) -> ()) {
+        if access_token != nil {
+            print(created_token + expired_token)
+            print(Date().timeIntervalSince1970)
+            if created_token + expired_token > Date().timeIntervalSince1970 {
+                print("Use the old token")
+                completionHandler(true, nil)
+                return
+            }
+        }
         DispatchQueue.global(qos: .background).async {
+            print("Create a new token")
             let postData: [String:String] = [
                 "grant_type"    : "client_credentials",
                 "client_id"     : self.KEY_UID,
@@ -74,8 +92,11 @@ class Oauth {
                     } else if let d = data {
                         do {
                             if let respJson: NSDictionary = try JSONSerialization.jsonObject(with: d, options: JSONSerialization.ReadingOptions.mutableContainers) as? NSDictionary {
+                                print(respJson)
                                 DispatchQueue.main.async {
                                     self.access_token = respJson["access_token"] as? String
+                                    self.created_token = respJson["created_at"] as? Double
+                                    self.expired_token = respJson["expires_in"] as? Double
                                     completionHandler(true, nil)
                                 }
                             }
