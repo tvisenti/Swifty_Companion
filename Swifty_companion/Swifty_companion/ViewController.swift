@@ -33,13 +33,13 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    func showSpinner() {
+    @objc func showSpinner() {
         spinnerActivity.startAnimating()
         spinnerActivity.isHidden = false
         buttonText.isHidden = true
     }
     
-    func hideSpinner() {
+    @objc func hideSpinner() {
         spinnerActivity.stopAnimating()
         spinnerActivity.isHidden = true
         buttonText.isHidden = false
@@ -78,7 +78,7 @@ class ViewController: UIViewController {
         }
     }
     
-    func alertError(message: String) {
+    @objc func alertError(message: String) {
         let alert = UIAlertController(title: "Error", message: message, preferredStyle: UIAlertControllerStyle.alert)
         let cancelAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         alert.addAction(cancelAction)
