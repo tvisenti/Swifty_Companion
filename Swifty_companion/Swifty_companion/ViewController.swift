@@ -51,6 +51,7 @@ class ViewController: UIViewController {
         if let login = textField.text {
             if login.isEmpty {
                 self.hideSpinner()
+                self.alertError(message: "The field 'Login' is empty")
                 return
             }
             authentification.connectToAPI(completionHandler: { (hasSucceed, error) in
@@ -63,16 +64,25 @@ class ViewController: UIViewController {
                             self.userInfo = user!
                             self.performSegue(withIdentifier: "SearchToProfilSegue", sender: self)
                         } else {
-                            print("Error (getUserInfo/buttonAction): \(error)")
+                            print("Error (getUserInfo/buttonAction)")
+                            self.alertError(message: "Can't get this user")
                             self.hideSpinner()
                         }
                     })
                 } else {
-                    print("Error (connectToAPI/buttonAction): \(error)")
+                    print("Error (connectToAPI/buttonAction)")
+                    self.alertError(message: "Can't get this user")
                     self.hideSpinner()
                 }
             })
         }
+    }
+    
+    func alertError(message: String) {
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: UIAlertControllerStyle.alert)
+        let cancelAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alert.addAction(cancelAction)
+        self.present(alert, animated: true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
